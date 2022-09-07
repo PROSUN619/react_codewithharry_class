@@ -24,3 +24,6 @@ npm uninstall react-router-dom@5.2.0
 
 //build react application
 npm run build
+
+//React life cycle diagram
+https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/

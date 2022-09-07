@@ -18,17 +18,22 @@ export class News extends Component {
     category : PropTypes.string,
   }
 
+  capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 
   defaultImageUrl = 'https://images.hindustantimes.com/img/2022/09/02/1600x900/d6849b9e-2ab0-11ed-9b13-2e13773bcef4_1662118296534.jpg';
-  constructor() {
+  constructor(props) {
    // console.log('I am from constructor');
-    super();
+    super(props);
     this.state = {
       articles: [],
       loading: true,
       page: 1,
       totalResults: 0
     }
+    document.title = `${this.capitalizeFirstLetter(props.category)} - News Monkey`
   }
 
   getData = async () => {
@@ -103,7 +108,7 @@ export class News extends Component {
    // console.log('I am from return');
     return (
       <div className="container">
-        <h2 className="text-center my-3">News Monkey - Top Headline</h2>
+        <h2 className="text-center my-3">News Monkey - Top {this.capitalizeFirstLetter(this.props.category)} Headline</h2>
         {this.state.loading && <Spinner/>}
         
           <div className="row">
