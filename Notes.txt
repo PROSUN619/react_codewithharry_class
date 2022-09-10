@@ -27,3 +27,9 @@ npm run build
 
 //React life cycle diagram
 https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+//we have install react infinite scroll
+install --save react-infinite-scroll-component
+
+//install top loading bar
+npm install --save react-top-loading-bar

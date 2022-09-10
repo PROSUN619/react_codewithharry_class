@@ -39,11 +39,14 @@ export class News extends Component {
   }
 
   getData = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?category=${this.props.category}&country=${this.props.country}&apiKey=6dcdadbc546a431c83ff219a0e73afb8&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+    this.props.setProgress(10);
+    let url = `https://newsapi.org/v2/top-headlines?category=${this.props.category}&country=${this.props.country}&apiKey=${this.props.apiKey}&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
     //debugger
     this.setState({ loading: true });
     let data = await fetch(url);
+    this.props.setProgress(30);
     let parsedData = await data.json();
+    this.props.setProgress(50);
     // console.log(parsedData);
     this.setState({
       articles: parsedData.articles,
@@ -51,6 +54,7 @@ export class News extends Component {
       loading: false,
       page: this.state.page + 1
     });
+    this.props.setProgress(100);
   }
 
 
@@ -60,7 +64,7 @@ export class News extends Component {
 
   fetchMoreData = async () => {
 
-    let url = `https://newsapi.org/v2/top-headlines?category=${this.props.category}&country=${this.props.country}&apiKey=6dcdadbc546a431c83ff219a0e73afb8&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?category=${this.props.category}&country=${this.props.country}&apiKey=${this.props.apiKey}&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
     //debugger
     this.setState({ loading: true });
     let data = await fetch(url);
@@ -81,7 +85,7 @@ export class News extends Component {
 
     return (
       <>
-        <h2 className="text-center my-3">News Monkey - Top {this.capitalizeFirstLetter(this.props.category)} Headline</h2>
+        <h2 className="text-center">News Monkey - Top {this.capitalizeFirstLetter(this.props.category)} Headline</h2>
         {/* {this.state.loading && <Spinner/>} */}
         <InfiniteScroll
           dataLength={this.state.articles.length}
